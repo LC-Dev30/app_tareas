@@ -8,8 +8,8 @@ function App() {
   const [renderUI,setRenderUI] = useState<boolean>();
   const [textButton,setTextbutton] = useState("Crear");
   const [IdTarea,setIdTarea] = useState("");
-  const textarea = useRef<HTMLTextAreaElement>();
-  const input = useRef<HTMLInputElement>();
+  const textarea = useRef<HTMLTextAreaElement>(null);
+  const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setRenderUI(false)
@@ -43,12 +43,11 @@ function App() {
   }
 
 //metodo optener valores de input para editar tarea
-  function getValuesTask(e: MouseEvent){
-    const valueBoton = e.target as HTMLButtonElement;
+  function getValuesTask(id: string){
    
-    let res = BuscarTareaId(valueBoton.value)
+    let res = BuscarTareaId(id)
   
-    if (input.current !== undefined && res?.Titulo != null && textarea.current && res?.Descripcion) {
+    if (input.current !== null && res?.Titulo != null && textarea.current && res?.Descripcion) {
       input.current.value = res?.Titulo
       textarea.current.value = res.Descripcion
       setIdTarea(res.Id)
@@ -61,7 +60,7 @@ function App() {
      if(textButton == 'Editar'){
       const res = BuscarTareaId(IdTarea);
       
-      if (input.current !== undefined && res?.Titulo != null && textarea.current && res?.Descripcion) {
+      if (input.current !== null && res?.Titulo != null && textarea.current != null && res?.Descripcion) {
         res.Titulo = input.current.value
         res.Descripcion = textarea.current.value 
         setRenderUI(true)
@@ -71,9 +70,8 @@ function App() {
   }
 
   //metodo eliminar tarea
-  function eliminarTarea(e: MouseEvent){
-     const indexTarea = e.target as HTMLButtonElement;
-     datosTareas.splice(parseInt(indexTarea.value),1)
+  function eliminarTarea(indexTarea: number):void{
+     datosTareas.splice(indexTarea,1)
      setRenderUI(true)
   }
 
@@ -108,8 +106,8 @@ function App() {
                          <span className='card-header'>{t.Titulo}</span>
                          <p>{t.Descripcion}</p>
                      <div className='d-flex gap-2'>
-                        <button type='button' onClick={getValuesTask} value={t.Id} className='btn btn-secondary'>Editar</button>
-                        <button onClick={eliminarTarea} value={i} className='btn btn-danger'>Eliminar</button>
+                        <button type='button' onClick={() => getValuesTask(t.Id)} value={t.Id} className='btn btn-secondary'>Editar</button>
+                        <button onClick={() => eliminarTarea(i)} value={i} className='btn btn-danger'>Eliminar</button>
                      </div>
                      </div>
                   </li>
