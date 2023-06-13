@@ -84,8 +84,8 @@ function App() {
 }
 
   return (
-    <div className='container d-flex col-12'>
-        <form className='d-flex gap-2 card col-md-12' onSubmit={crearTarea}>
+    <div className='app'>
+        <form className='d-flex gap-2 card' onSubmit={crearTarea}>
         <h2 className=''>Nueva</h2>
             <div className=''>
                 <input ref={input} name='tareaName' className='form-control' type="text" placeholder='Titulo' />
@@ -95,10 +95,10 @@ function App() {
             </div>
              <button className='btn btn-success' type='submit'>{textButton}</button>
         </form>
-        <section className='col-6 col-md-12'>
+        <section className='col-6 section_tareas'>
+           <div>
            <h4>Lista de Tareas</h4>
-           <div className='section_tareas'>
-            <ul className='d-flex flex-column gap-3 p-3'>
+            <ul id='content' className='d-flex flex-column gap-3 p-3'>
                {
                 datosTareas.map((t,i) => (
                   <li key={i}>

@@ -46,13 +46,41 @@ ul{
 .section_tareas{
   width: 300px;
   height: 400px;
+  margin-top: 30px;
   overflow-y:auto;
-  
 }
 
+/* Estilos barra lateral */
 ::-webkit-scrollbar {
   width: 10px; /* Anchura de la barra de desplazamiento */
-  color: aqua;
+  background-color: rgb(119, 197, 197); 
+  border-radius: 8px;
+  border: 1px solid #fff;
+}
+
+::-webkit-scrollbar-thumb {
   background-color: rgb(35, 104, 104);
+  width: 10px;
   border-radius: 8px;
 }
+
+::-webkit-scrollbar-thumb::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--scroll-progress);
+  width: 10px;
+}
+
+.app{
+  display: flex;
+}
+
+/* Estilos distintas pantallas */
+@media (max-width: 700px) {
+  .app{
+    flex-direction: column;
+  }
+}
+
