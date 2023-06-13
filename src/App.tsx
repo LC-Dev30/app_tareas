@@ -97,7 +97,7 @@ function App() {
             </div>
              <button className='btn btn-outline-success' type='submit'>{textButton}</button>
         </form>
-        <section className='col-6 section_tareas'>
+        <section className='section_tareas'>
            <div>
            <h4 className='card-header'>Lista de Tareas</h4>
            <span>tareas: ({datosTareas.length})</span>
@@ -106,7 +106,7 @@ function App() {
                 datosTareas.map((t,i) => (
                   <li key={i}>
                      <div className='card d-flex justify-content-center align-items-center'>
-                         <span className='card-header'>{t.Titulo}</span>
+                         <h4 className='card-header'>{t.Titulo}</h4>
                          <p className='text_descripcion'>{t.Descripcion}</p>
                      <div className='d-flex gap-2'>
                         <button type='button' onClick={() => getValuesTask(t.Id)} value={t.Id} className='btn btn-secondary'>Editar</button>
